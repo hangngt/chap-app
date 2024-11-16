@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module chattcp_server {
+	requires java.desktop;
+}

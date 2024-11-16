@@ -1,0 +1,26 @@
+package chattcp;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+
+class CheckListItem {
+
+  private JList<String> label;
+  private boolean isSelected = false;
+
+  public CheckListItem(JList<String> label) {
+    this.label = label;
+  }
+
+  public boolean isSelected() {
+    return isSelected;
+  }
+
+  public void setSelected(boolean isSelected) {
+    this.isSelected = isSelected;
+  }
+
+  public JList<String> jList() {
+    return label;
+  }
+}

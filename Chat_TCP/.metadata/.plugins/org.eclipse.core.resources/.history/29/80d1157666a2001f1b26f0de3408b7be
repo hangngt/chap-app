@@ -1,0 +1,5 @@
+package chattcp_server;
+
+public class SocketServer {
+
+}

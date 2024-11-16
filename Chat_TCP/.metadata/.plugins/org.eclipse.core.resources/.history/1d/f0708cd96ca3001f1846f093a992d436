@@ -1,0 +1,30 @@
+package chattcp;
+
+import java.awt.Component;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+
+class CheckboxListCellRenderer extends JCheckBox implements ListCellRenderer<Boolean> {
+    private final String[] data;
+
+    public CheckboxListCellRenderer(String[] data) {
+        this.data = data;
+    }
+
+    @Override
+    public Component getListCellRendererComponent(JList<? extends Boolean> list, Boolean value,
+                                                  int index, boolean isSelected, boolean cellHasFocus) {
+        setComponentOrientation(list.getComponentOrientation());
+        setFont(list.getFont());
+
+        setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+        setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+
+        setSelected(value != null && value); // Trạng thái chọn của checkbox
+        setEnabled(list.isEnabled());
+
+        setText(data[index]); // Hiển thị văn bản tương ứng với chỉ số
+        return this;
+    }
+}

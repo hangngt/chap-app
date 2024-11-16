@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+E:\Users\FPT SHOP\eclipse-workspace\Chat_TCP\.metadata\.plugins\org.eclipse.jdt.core
+1305544958.index
+1523210252.index
+369630251.index
+879755853.index
+1865797976.index

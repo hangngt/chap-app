@@ -1,0 +1,25 @@
+package chattcp;
+
+import javax.swing.DefaultListCellRenderer;
+
+class CheckListItem {
+
+  private DefaultListCellRenderer label;
+  private boolean isSelected = false;
+
+  public CheckListItem(DefaultListCellRenderer label) {
+    this.label = label;
+  }
+
+  public boolean isSelected() {
+    return isSelected;
+  }
+
+  public void setSelected(boolean isSelected) {
+    this.isSelected = isSelected;
+  }
+
+  public DefaultListCellRenderer toDefaultListCellRenderer() {
+    return label;
+  }
+}

@@ -1,0 +1,62 @@
+package chattcp;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import java.text.MessageFormat;
+
+public class ListSelectionDocument extends PlainDocument implements ListSelectionListener {
+    private MessageFormat elementFormat;
+    private String delim;
+    private boolean[] selectedItems;
+
+    public ListSelectionDocument(int itemCount) {
+        this(new MessageFormat("{0}"), "\n");
+        selectedItems = new boolean[itemCount];
+    }
+
+    public ListSelectionDocument(MessageFormat elementFormat, String delim) {
+        this.elementFormat = elementFormat;
+        this.delim = delim;
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        JList<?> list = (JList<?>) e.getSource();
+        ListModel<?> model = list.getModel();
+
+        int minSelectionIndex = list.getSelectionModel().getMinSelectionIndex();
+        int maxSelectionIndex = list.getSelectionModel().getMaxSelectionIndex();
+
+        StringBuilder textBuilder = new StringBuilder();
+
+        for (int i = minSelectionIndex; i <= maxSelectionIndex; i++) {
+            if (list.getSelectionModel().isSelectedIndex(i)) {
+                selectedItems[i] = !selectedItems[i]; // Cập nhật trạng thái chọn
+                Object elementAt = model.getElementAt(i);
+                formatElement(elementAt, textBuilder, i);
+            }
+        }
+
+        setText(textBuilder.toString());
+    }
+
+    private void formatElement(Object element, StringBuilder textBuilder, int i) {
+        String formatted = elementFormat.format(new Object[]{element});
+        textBuilder.append(formatted).append(delim);
+    }
+
+    private void setText(String text) {
+        try {
+            remove(0, getLength());
+            insertString(0, text, null);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isSelected(int index) {
+        return selectedItems[index];
+    }
+}
